@@ -8,7 +8,9 @@ Mensage() {
 }
 
 for i in ${servicios[@]};do
-    if (systemctl -q is-failed $i) ;then
+    if (systemctl -q is-active $i) ;then
         echo $i active
+    else
+        echo $i No esta activo
     fi
 done
