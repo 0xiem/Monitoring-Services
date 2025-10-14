@@ -1,11 +1,14 @@
 #!/bin/bash
-CheckServiceWeb=$(systemctl is-active apache2)
-CheckServiceBD=$(systemctl is-active mysql)
+servicios=('apache2' 'mysql')
+FicheroLog='/var/log/monitoratge-serveis'
 
-if [[ $CheckServiceWeb = "inactive" && $CheckServiceBD = "inactive" ]] ;then
-    echo  '['$(date)'] [Alerta] Els serveis apache2 i mysql no estan actius al servidor ' $(hostname)
-elif [ $CheckServiceWeb = 'inactive'  ];then
-    echo  '['$(date)'] [Alerta] El servei apache2  no esta actiu al servidor ' $(hostname)
-elif [ $CheckServiceBD = 'inactive'  ];then
-    echo  '['$(date)'] [Alerta] El servei mysql  no esta actiu al servidor ' $(hostname)
-fi
+Mensage() {
+    Correo='ewcmfg@gmail.com'
+    Subject='Urgente Mira El correo'
+}
+
+for i in ${servicios[@]};do
+    if [ systemctl is-active $i ];then
+        echo $i active
+    fi
+done
