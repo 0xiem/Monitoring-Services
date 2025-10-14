@@ -8,7 +8,7 @@ Mensage() {
 }
 
 for i in ${servicios[@]};do
-    if [ systemctl is-active $i ];then
+    if ${systemctl is-active $i} ;then
         echo $i active
     fi
 done
